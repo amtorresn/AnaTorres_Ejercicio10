@@ -52,23 +52,95 @@ plt.plot(date,v-v_filtrada, 'b-')
 plt.ylabel("valor")
 plt.xlabel("Fecha")
 plt.legend(['Residuales'])
-plt.show()
+plt.savefig("1")
+
+
+N  = 1   # Orden del filtro
+Wn = 0.0001 # Corte de frecuencia
+B, A = signal.butter(N, Wn)
+
+
+v_filtrada = signal.filtfilt(B,A, a[2])
+
+
+fig = plt.figure(figsize=(20,10))
+ax1 = fig.add_subplot(211)
+plt.plot(date,v, 'b-')
+plt.plot(date,v_filtrada, 'r-',linewidth=2)
+plt.ylabel("valor")
+plt.legend(['Original','Filtrado'])
+plt.title("valor")
+ax1.axes.get_xaxis().set_visible(False)
+ax1 = fig.add_subplot(212)
+plt.plot(date,v-v_filtrada, 'b-')
+plt.ylabel("valor")
+plt.xlabel("Fecha")
+plt.legend(['Residuales'])
+plt.savefig("2")
+
+
+N  = 4   # Orden del filtro
+Wn = 0.01 # Corte de frecuencia
+B, A = signal.butter(N, Wn)
+
+
+v_filtrada = signal.filtfilt(B,A, a[2])
+
+
+fig = plt.figure(figsize=(20,10))
+ax1 = fig.add_subplot(211)
+plt.plot(date,v, 'b-')
+plt.plot(date,v_filtrada, 'r-',linewidth=2)
+plt.ylabel("valor")
+plt.legend(['Original','Filtrado'])
+plt.title("valor")
+ax1.axes.get_xaxis().set_visible(False)
+ax1 = fig.add_subplot(212)
+plt.plot(date,v-v_filtrada, 'b-')
+plt.ylabel("valor")
+plt.xlabel("Fecha")
+plt.legend(['Residuales'])
+plt.savefig("3")
+
+
+N  = 4   # Orden del filtro
+Wn = 0.0001 # Corte de frecuencia
+B, A = signal.butter(N, Wn)
+
+
+v_filtrada = signal.filtfilt(B,A, a[2])
+
+
+fig = plt.figure(figsize=(20,10))
+ax1 = fig.add_subplot(211)
+plt.plot(date,v, 'b-')
+plt.plot(date,v_filtrada, 'r-',linewidth=2)
+plt.ylabel("valor")
+plt.legend(['Original','Filtrado'])
+plt.title("valor")
+ax1.axes.get_xaxis().set_visible(False)
+ax1 = fig.add_subplot(212)
+plt.plot(date,v-v_filtrada, 'b-')
+plt.ylabel("valor")
+plt.xlabel("Fecha")
+plt.legend(['Residuales'])
+plt.savefig("3")
 
 
 plt.figure(figsize=(20,7))
 ruido=v-v_filtrada
 corr=signal.correlate(ruido,ruido,mode="full")
 plt.plot(corr[len(corr)//2:])
-plt.show()
+plt.savefig("rel1")
 
 
 plt.figure(figsize=(20,7))
 corr=np.correlate(ruido,ruido,mode="full")
 plt.plot(corr[len(corr)//2:])
-plt.show()
+plt.savefig("rel2")
 
 
 plt.figure(figsize=(20,7))
 corr=np.correlate(ruido,ruido,mode="full")
 plt.plot(np.abs(corr[len(corr)//2:]))
-plt.show()
+plt.savefig("rel3")
