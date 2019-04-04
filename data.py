@@ -31,8 +31,9 @@ a.show()
 date = a[0]
 v = a[2]
 
-N  = 1   # Orden del filtro
-Wn = 0.01 # Corte de frecuencia
+
+N  = 4   # Orden del filtro
+Wn = 0.0001 # Corte de frecuencia
 B, A = signal.butter(N, Wn)
 
 
@@ -53,6 +54,7 @@ plt.ylabel("valor")
 plt.xlabel("Fecha")
 plt.legend(['Residuales'])
 plt.savefig("1")
+
 
 
 N  = 1   # Orden del filtro
@@ -79,6 +81,8 @@ plt.legend(['Residuales'])
 plt.savefig("2")
 
 
+
+
 N  = 4   # Orden del filtro
 Wn = 0.01 # Corte de frecuencia
 B, A = signal.butter(N, Wn)
@@ -103,8 +107,8 @@ plt.legend(['Residuales'])
 plt.savefig("3")
 
 
-N  = 4   # Orden del filtro
-Wn = 0.0001 # Corte de frecuencia
+N  = 1   # Orden del filtro
+Wn = 0.01 # Corte de frecuencia
 B, A = signal.butter(N, Wn)
 
 
@@ -124,7 +128,59 @@ plt.plot(date,v-v_filtrada, 'b-')
 plt.ylabel("valor")
 plt.xlabel("Fecha")
 plt.legend(['Residuales'])
-plt.savefig("3")
+plt.savefig("4")
+
+
+
+N  = 2   # Orden del filtro
+Wn = 0.1 # Corte de frecuencia
+B, A = signal.butter(N, Wn)
+
+
+v_filtrada = signal.filtfilt(B,A, a[2])
+
+
+fig = plt.figure(figsize=(20,10))
+ax1 = fig.add_subplot(211)
+plt.plot(date,v, 'b-')
+plt.plot(date,v_filtrada, 'r-',linewidth=2)
+plt.ylabel("valor")
+plt.legend(['Original','Filtrado'])
+plt.title("valor")
+ax1.axes.get_xaxis().set_visible(False)
+ax1 = fig.add_subplot(212)
+plt.plot(date,v-v_filtrada, 'b-')
+plt.ylabel("valor")
+plt.xlabel("Fecha")
+plt.legend(['Residuales'])
+plt.savefig("5")
+
+#Mejor filtrado:
+
+N  = 1   # Orden del filtro
+Wn = 0.1 # Corte de frecuencia
+B, A = signal.butter(N, Wn)
+
+
+v_filtrada = signal.filtfilt(B,A, a[2])
+
+
+fig = plt.figure(figsize=(20,10))
+ax1 = fig.add_subplot(211)
+plt.plot(date,v, 'b-')
+plt.plot(date,v_filtrada, 'r-',linewidth=2)
+plt.ylabel("valor")
+plt.legend(['Original','Filtrado'])
+plt.title("valor (mejor filtrado)")
+ax1.axes.get_xaxis().set_visible(False)
+ax1 = fig.add_subplot(212)
+plt.plot(date,v-v_filtrada, 'b-')
+plt.ylabel("valor")
+plt.xlabel("Fecha")
+plt.legend(['Residuales'])
+plt.savefig("6")
+
+
 
 
 plt.figure(figsize=(20,7))
